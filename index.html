@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mister-Canvas</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+
+
+<body onload="init()">
+    
+
+    <header class="header flex space-between">
+        <img class="logo" src="./img/LOGO/logo.png" alt="">
+        <ul class="main-nav flex clean-list">
+            <li><a href="#" onclick="toggleMenu()">Memes</a></li>
+            <li><a href="#" onclick="toggleMenu()">Gallery</a></li>
+            <li><a href="#" onclick="toggleMenu()">About</a></li>
+        </ul>
+    </header>
+
+
+    <main>
+        <input type="search">
+
+        <div class="gallery-container grid">
+            <div class="img-card"><img src="./img/meme-imgs (square)/1.jpg" alt=""></div>
+            <div><img src="./img/meme-imgs (square)/2.jpg" alt=""></div>
+            <div><img src="./img/meme-imgs (square)/3.jpg" alt=""></div>
+            <div><img src="./img/meme-imgs (square)/4.jpg" alt=""></div>
+            <div><img src="./img/meme-imgs (square)/5.jpg" alt=""></div>
+            <div><img src="./img/meme-imgs (square)/6.jpg" alt=""></div>
+            <div><img src="./img/meme-imgs (square)/7.jpg" alt=""></div>
+            <div><img src="./img/meme-imgs (square)/8.jpg" alt=""></div>
+            <div><img src="./img/meme-imgs (square)/9.jpg" alt=""></div>
+            <div><img src="./img/meme-imgs (square)/10.jpg" alt=""></div>
+            <div><img src="./img/meme-imgs (square)/11.jpg" alt=""></div>
+            <div><img src="./img/meme-imgs (square)/12.jpg" alt=""></div>
+            <div><img src="./img/meme-imgs (square)/13.jpg" alt=""></div>
+            <div><img src="./img/meme-imgs (square)/14.jpg" alt=""></div>
+            <div><img src="./img/meme-imgs (square)/15.jpg" alt=""></div>
+            <div><img src="./img/meme-imgs (square)/16.jpg" alt=""></div>
+            <div><img src="./img/meme-imgs (square)/17.jpg" alt=""></div>
+            <div><img src="./img/meme-imgs (square)/18.jpg" alt=""></div>
+
+        </div>
+    </main>
+
+
+    <div class="share-container"></div>
+    <div class="canvas-container">
+        <canvas class="canvas" height="400" width="600" onclick="drew(event)"></canvas>
+    </div>
+
+    <button onclick="clearCanvas()">Clear Canvas</button>
+    <button onclick="onDrawBtn()">Write</button>
+    <input type="text" value="" name="user-text" placeholder="Write something">
+
+    <input class="color-pick" type="color">
+
+
+    <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
+
+    <button class="btn" onclick="uploadImg()">Upload Image from Canvas</button>
+    <a href="#" onclick="downloadCanvas(this)" download="myphoto">Download </a>
+
+
+    <script src="./js/canvas-utils.js"></script>
+    <script src="./js/upload-service.js"></script>
+    <script src="./js/main.js"></script>
+
+</body>
+
+</html>
