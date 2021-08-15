@@ -211,6 +211,10 @@ select[name='font-selector'] {
     cursor: pointer;
 }
 
+.btn-menu-toggle {
+    display: none;
+}
+
 /* HELPERS */
 
 /* flex helpers */
@@ -402,6 +406,10 @@ select[name='font-selector'] {
     body.menu-open .main-nav {
         transform: translateX(0%);
         transition: transform .6s;
+    }
+
+    .btn-menu-toggle {
+        display: block;
     }
 
     .main-nav a {
