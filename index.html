@@ -12,66 +12,165 @@
 
 
 <body onload="init()">
-    
 
-    <header class="header flex space-between">
+
+    <header class="header main-layout flex space-between align-center">
         <img class="logo" src="./img/LOGO/logo.png" alt="">
         <ul class="main-nav flex clean-list">
-            <li><a href="#" onclick="toggleMenu()">Memes</a></li>
-            <li><a href="#" onclick="toggleMenu()">Gallery</a></li>
-            <li><a href="#" onclick="toggleMenu()">About</a></li>
+            
+            <li><a href="#" onclick="onMemes()">Memes</a></li>
+            <li><a href="#" onclick="onGallery()">Gallery</a></li>
+            <li><a href="#" class="open-modal-btn" onclick="onOpenModalBtn()">About</a></li>
         </ul>
+        <button class="btn-menu-toggle" onclick="toggleMenu()"> ☰ </button>
     </header>
 
 
-    <main>
-        <input type="search">
+    <main class="gallery-section main-layout">
+
+        <div class="search-bar-container"> <input class="search-bar" type="text" placeholder="Search..">
+        </div>
+
 
         <div class="gallery-container grid">
-            <div class="img-card"><img src="./img/meme-imgs (square)/1.jpg" alt=""></div>
-            <div><img src="./img/meme-imgs (square)/2.jpg" alt=""></div>
-            <div><img src="./img/meme-imgs (square)/3.jpg" alt=""></div>
-            <div><img src="./img/meme-imgs (square)/4.jpg" alt=""></div>
-            <div><img src="./img/meme-imgs (square)/5.jpg" alt=""></div>
-            <div><img src="./img/meme-imgs (square)/6.jpg" alt=""></div>
-            <div><img src="./img/meme-imgs (square)/7.jpg" alt=""></div>
-            <div><img src="./img/meme-imgs (square)/8.jpg" alt=""></div>
-            <div><img src="./img/meme-imgs (square)/9.jpg" alt=""></div>
-            <div><img src="./img/meme-imgs (square)/10.jpg" alt=""></div>
-            <div><img src="./img/meme-imgs (square)/11.jpg" alt=""></div>
-            <div><img src="./img/meme-imgs (square)/12.jpg" alt=""></div>
-            <div><img src="./img/meme-imgs (square)/13.jpg" alt=""></div>
-            <div><img src="./img/meme-imgs (square)/14.jpg" alt=""></div>
-            <div><img src="./img/meme-imgs (square)/15.jpg" alt=""></div>
-            <div><img src="./img/meme-imgs (square)/16.jpg" alt=""></div>
-            <div><img src="./img/meme-imgs (square)/17.jpg" alt=""></div>
-            <div><img src="./img/meme-imgs (square)/18.jpg" alt=""></div>
 
         </div>
     </main>
 
 
-    <div class="share-container"></div>
-    <div class="canvas-container">
-        <canvas class="canvas" height="400" width="600" onclick="drew(event)"></canvas>
+
+
+
+
+    <!-- Canvas section -->
+
+    <section class="canvas-section main-layout flex space-between hide">
+        <!-- <div class="share-container"></div> -->
+
+        <section class="canvas-area ">
+            <a class="back-to-gallery-btn" href="" onclick="onGallery()">&#60 Back to gallery</a>
+            <canvas class="canvas" height="500" width="500"></canvas>
+        </section>
+
+        <section class="buttons-section">
+
+            <nav class="btns-nav flex space-between align-center">
+                <span class="edit-txt">Edit Text Lines</span>
+                <ul class="flex clean-list">
+                    <li onclick="onSwitchLine()">1/2</li>
+                    <li onclick="onUpLineMove()">&#8639;</li>
+                    <li onclick="onDownLineMove()">&#8642;</li>
+                    <li><img src="./img/ICONS/add.png" alt="" onclick="onAddLine()"></li>
+                    <li><img src="./img/ICONS/delete.png" alt="" onclick="onRemoveLine()"></li>
+                </ul>
+            </nav>
+
+            <nav class="btns-nav-bottom grid">
+
+                <select name="font-selector" onchange="getUsrFont(this.value)">
+
+                    <option value="font-change">Font</option>
+                    <option value="impact">Impact </option>
+                    <option value="arial">Arial </option>
+                    <option value="comic">Comic </option>
+                    <option value="courier">Courier </option>
+                </select>
+
+
+                <nav class="btns-nav flex align-center">
+                    <ul class="flex clean-list">
+                        <li onclick="onFontSizeDec()"> <span class="font-size-dec">A&#8315</span> </li>
+                        <li onclick="onFontSizeInc()"> <span class="font-size-inc">A&#8314</span> </li>
+                        <li> <span class="font-separator"> | </span> </li>
+                        <li> <span class="align-left" data-rlc-value="left" onclick="onAlignmentLRC(this)"><img
+                                    src="./img/ICONS/align-left.png" alt=""></span> </li>
+                        <li> <span class="align-center" data-rlc-value="center" onclick="onAlignmentLRC(this)"><img
+                                    src="./img/ICONS/align-center.png" alt=""></span> </li>
+                        <li> <span class="align-right" data-rlc-value="right" onclick="onAlignmentLRC(this)"><img
+                                    src="./img/ICONS/align-right.png" alt=""></span> </li>
+                        <li> <span class="font-separator"> | </span> </li>
+                        <li> <span onclick="onStrokeColor()"><img src="./img/ICONS/A.png" alt=""></span> </li>
+                        <li> <span> <img src="./img/ICONS/text-color.png" alt="" onclick="onBrush()"></span> </li>
+                    </ul>
+                </nav>
+
+                <input name="user-text" type="text" placeholder="Write something" oninput="getTypedText(this.value)"
+                    onkeyup="onEnterPressed(event)">
+                <!-- <textarea name="user-text" id="" cols="100" rows="100" placeholder="Write something" oninput="drawTypedTextOnCanvas(this.value)"></textarea> -->
+
+            </nav>
+            <a href="#" onclick="downloadCanvas(this)" download="myphoto">
+                <div class="share-btn" onclick="downloadCanvas(this)">Download</div>
+            </a>
+
+
+
+
+            <!-- 
+            <button onclick="clearCanvas()">Clear Canvas</button>
+            <button onclick="onDrawBtn()">Write</button>
+            <input type="text" value="" name="user-text" placeholder="Write something">
+
+            <input class="color-pick" type="color">
+
+
+            <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
+
+            <button class="btn" onclick="uploadImg()">Upload Image from Canvas</button> -->
+        </section>
+    </section>
+
+
+
+    <!-- Modal (about-btn) -->
+
+    <div class="modal-about-btn">
+
+        <div class="modal">
+            <div class="modal-header">
+
+                <div class="title">About</div>
+                <button class="close-modal-btn" onclick="onCloseModalBtn()">&times;</button>
+            </div>
+            <div class="modal-body">
+                it's all about SURVIVING the bootcamp!
+            </div>
+        </div>
+
+        <div class="overlay"></div>
+
     </div>
 
-    <button onclick="clearCanvas()">Clear Canvas</button>
-    <button onclick="onDrawBtn()">Write</button>
-    <input type="text" value="" name="user-text" placeholder="Write something">
+    <!-- Modal (color-picker) -->
 
-    <input class="color-pick" type="color">
+    <div class="modal-color-btn">
 
+        <div class="modal-color modal">
+            <div class="modal-header">
 
-    <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
+                <div class="title">Choose your favourite color</div>
+                <button class="close-modal-btn" onclick="onCloseModalColorBtn()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="color" name="color-picker" onchange="onColorPick(this.value)">
+            </div>
+        </div>
 
-    <button class="btn" onclick="uploadImg()">Upload Image from Canvas</button>
-    <a href="#" onclick="downloadCanvas(this)" download="myphoto">Download </a>
+        <div class="overlay"></div>
 
+    </div>
 
+    <!-- SCRIPTs -->
+
+    <script src="./js/model.js"></script>
     <script src="./js/canvas-utils.js"></script>
-    <script src="./js/upload-service.js"></script>
-    <script src="./js/main.js"></script>
+    <script src="./js/meme-service.js"></script>
+    <script src="./js/listeners-service.js"></script>
+    <script src="./js/modal.js"></script>
+    <script src="./js/uploadShareDownload-service.js"></script>
+    <script src="./js/canvas-controller.js"></script>
+    <script src="./js/controller.js"></script>
+    <script src="./js/buttons-controller.js"></script>
 
 </body>
 

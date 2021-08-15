@@ -13,82 +13,56 @@ function saveAndRestoreExample() {
 }
 
 
-function drewImg() {
-    var img = new Image()
-    img.src = 'img/1.jpg'
-    img.onload = () => {
-        gCtx.drewImage(img, 0, 0, gElCanvas.width, gElCanvas.height)  //img,x,y,xend,yend
-    }
+function resizeCanvas() {
+    var elContainer = document.querySelector('.canvas-area');
+    // Note: changing the canvas dimension this way clears the canvas
+    gCanvas.width = elContainer.offsetWidth - 20
+    // Unless needed, better keep height fixed.
+    // gCanvas.height = elContainer.offsetHeight
 }
 
 
+function clearCanvas() {
+    console.log('clearing..');
+    gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
+}
+
+
+function drawImg() {
+
+    var img = new Image()
+    img.src = getSelectedImage(gMeme.selectedImgId).url
+    var width = img.naturalWidth
+    var height = img.naturalHeight
+    img.onload = () => {
+        gCtx.drawImage(img, 0, 0, width, height)
+    }
+
+}
+
 // function resizeCanvas() {
-    // changing canvas dimension this way clears the canvas
-    // var elContainer = document.querySelector('.canvas-container')
-    // gElCanvas.width = elContainer.offsetWidth-20
-// the we need to listen, the window have "resize" event, and call the function
-    // window.addEventListener('resize' , resizeCanvas)
+//     const elContainer = document.querySelector('.canvas-area')
+//     gElCanvas.width = elContainer.offsetWidth
+//     gElCanvas.height = elContainer.offsetHeight
 // }
 
 
-function downloadCanvas(elLink) {
-    const data = gElCanvas.toDataURL()
-    console.log('IMG' , data);
-    elLink.href = data
-    // elLink.download = 'puki'
-}
 
-
-
-// The next 2 functions handle IMAGE UPLOADING to img tag from file system: 
-function onImgInput(ev) {
-    loadImageFromInput(ev, renderImg)
-}
-
-function loadImageFromInput(ev, onImageReady) {
-    document.querySelector('.share-container').innerHTML = ''
-    var reader = new FileReader()
-
-    reader.onload = function (event) {
-        var img = new Image()
-        img.onload = onImageReady.bind(null, img)
-        img.src = event.target.result
-    }
-    reader.readAsDataURL(ev.target.files[0])
-}
-
-
-function renderImg(img) {
-    gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
-}
-
-
-// add Listeners // 
-function addListeners() {
-    addMouseListeners()
-    addTouchListeners()
-    window.addEventListener('resize', () => {
-        resizeCanvas()
-        renderCanvas()
-    })
-}
-
-function addMouseListeners() {
-    gElCanvas.addEventListener('mousemove', onMove)
-    gElCanvas.addEventListener('mousedown', onDown)
-    gElCanvas.addEventListener('mouseup', onUp)
-}
-
-function addTouchListeners() {
-    gElCanvas.addEventListener('touchmove', onMove)
-    gElCanvas.addEventListener('touchstart', onDown)
-    gElCanvas.addEventListener('touchend', onUp)
-}
-
-
-
-function resizeCanvas() {
-    const elContainer = document.querySelector('.canvas-container')
-    gElCanvas.width = elContainer.offsetWidth
-    gElCanvas.height = elContainer.offsetHeight
-}
+// function wrapText(context, txt, x, y, maxWidth, lineHeight) {
+//     var words = txt.split(' ');
+//     var line = '';
+//  debugger
+//     for(var i = 0; i < words.length; i++) {
+//         var testLine = line + words[i] + ' ';
+//         var testWidth = context.measureText(testLine).width;
+//         if (testWidth > maxWidth && i > 0) {
+//             line = words[i] + ' ';
+//             y += lineHeight;
+//             drawText(line, x, y);
+//         }
+//         else {
+//             line = testLine;
+//         }
+//     }
+//     drawText(line, x, y);
+// }
