@@ -14,9 +14,9 @@ function saveAndRestoreExample() {
 
 
 function resizeCanvas() {
-    var elContainer = document.querySelector('.canvas-area');
+    var elContainer = document.querySelector('.canvas-container');
     // Note: changing the canvas dimension this way clears the canvas
-    gCanvas.width = elContainer.offsetWidth - 20
+    gElCanvas.width = elContainer.offsetWidth - 20
     // Unless needed, better keep height fixed.
     // gCanvas.height = elContainer.offsetHeight
 }

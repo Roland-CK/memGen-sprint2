@@ -15,7 +15,6 @@ function onFontSizeInc() {
 
 
 function onDownLineMove() {
-    // debugger
     if (gMeme.lines[gMeme.selectedLineIdx].height > 490 || gMeme.lines[gMeme.selectedLineIdx].height === 490) return
     else
         gMeme.lines[gMeme.selectedLineIdx].height += 20
@@ -24,7 +23,7 @@ function onDownLineMove() {
 }
 
 function onUpLineMove() {
-    // debugger
+    
     if (gMeme.lines[gMeme.selectedLineIdx].height < 30 || gMeme.lines[gMeme.selectedLineIdx].height === 30) return
     else
         gMeme.lines[gMeme.selectedLineIdx].height -= 20
@@ -56,7 +55,7 @@ function onEnterPressed(event) {
 
     if (event.keyCode !== 13) return
     else {
-        // debugger
+        
         console.log('Enter key was pressed..');
         addLine()
         document.querySelector('[name=user-text]').value = ''
@@ -67,6 +66,7 @@ function onEnterPressed(event) {
 
 
 function onAddLine() {
+    
     console.log('Adding line..');
     addLine()
     document.querySelector('[name=user-text]').value = ''
@@ -92,7 +92,6 @@ function onAlignmentLRC (el) {
 // --- font btns  --- //
 
 function getUsrFont(fontVal) {
-    debugger
     if (fontVal === 'font-change') return
 
     else {
@@ -121,7 +120,7 @@ function onColorPick(value) {
 
 
 function onStrokeColor() {
-    // debugger
+    
     gStrokeModalIndicator = true
     openModalColor()
 
@@ -130,4 +129,8 @@ function onStrokeColor() {
 
 function toggleMenu() {
     document.body.classList.toggle('menu-open')
+}
+
+function onCloseMobileMenu() {
+    document.body.classList.remove('menu-open')
 }

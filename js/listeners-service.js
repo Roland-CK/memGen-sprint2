@@ -1,5 +1,7 @@
 'use strict'
 
+// var gStartPos
+// const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
 
 function addMouseListeners() {
     gElCanvas.addEventListener('mousemove', onMove)
@@ -57,8 +59,8 @@ function getEvPos(ev) {
 }
 
 
-// window.addEventListener('resize', (ev) => {
-//     console.log('ev', ev);
-//     resizeCanvas()
-//     renderCanvas()
-// })
+window.addEventListener('resize', (ev) => {
+    console.log('ev', ev);
+    resizeCanvas()
+    renderCanvas()
+})

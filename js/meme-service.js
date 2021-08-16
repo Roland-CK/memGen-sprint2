@@ -1,19 +1,21 @@
 'use strict'
 
+const KEY = 'memeDB'
+var gSavedMemes = []
 
 var gMeme = {
     selectedImgId: 0,
     selectedLineIdx: 0,
     lines: [
-        // {
-        //     font: 'impact',
-        //     txt: 'I never eat Falafel',
-        //     size: 40,
-        //     align: 'left',
-        //     color: 'white',
-        //     width: 50,
-        //     height: 50,
-        // }
+        {
+            font: 'impact',
+            txt: 'f',
+            size: 40,
+            align: 'left',
+            color: 'white',
+            width: 50,
+            height: 50,
+        }
     ]
 }
 
@@ -21,25 +23,51 @@ var gMeme = {
 function getTypedText(val) {
 
     if (!gMeme.lines.length) {
-        gMeme.lines.push(createLine(50, 50))
+        var alignX
+        switch (gMeme.lines[gMeme.selectedLineIdx].align) {
+            case 'left':
+                alignX = 50
+                break
+            case 'center':
+                alignX = gElCanvas.width / 2
+                break
+            case 'right':
+                alignX = gElCanvas.width - 50
+                break
+
+        }
+        gMeme.lines.push(createLine(alignX, 50))
     }
     gMeme.lines[gMeme.selectedLineIdx].txt = val
     renderCanvas()
 }
 
 function addLine() {
-// debugger
+
     if (!gMeme.lines[gMeme.selectedLineIdx].txt)
         return
 
     else {
-        gMeme.selectedLineIdx++
         var newLine
+        var alignX
+        switch (gMeme.lines[gMeme.selectedLineIdx].align) {
+            case 'left':
+                alignX = 50
+                break
+            case 'center':
+                alignX = gElCanvas.width / 2
+                break
+            case 'right':
+                alignX = gElCanvas.width - 50
+                break
 
-        (gMeme.lines.length >= 2) ? newLine = (createLine(50, 250)) : newLine = (createLine(50, 450))
+        }
+        (gMeme.lines.length >= 2) ? newLine = (createLine(alignX, 250)) : newLine = (createLine(alignX, 450))
 
         gMeme.lines.push(newLine)
     }
+    gMeme.selectedLineIdx++
+
 }
 
 function createLine(x, y) {
@@ -47,7 +75,7 @@ function createLine(x, y) {
         font: 'impact',
         txt: '',
         size: 40,
-        align: 'left',
+        align: gMeme.lines[gMeme.selectedLineIdx].align,
         color: 'white',
         stroke: 'black',
         width: x,
@@ -74,7 +102,7 @@ var gDirection = { up: false, down: true }
 function switchLine(currLineIdx) {
 
 
-    if (currLineIdx === 0) {
+    if ( currLineIdx === 0) {
         gDirection.up = true
         gDirection.down = false
     }
@@ -108,4 +136,8 @@ function removeLineFromModel() {
 }
 
 
+function onSaveMeme() {
+    gSavedMemes.push(gMeme)
+    saveToStorage (KEY, gSavedMemes)
 
+}

@@ -43,23 +43,35 @@ function drawText(txt, x, y, idx) {
     gCtx.fillStyle = gMeme.lines[idx].color
     gCtx.font = `${gMeme.lines[idx].size}px ${gMeme.lines[idx].font}`
 
+    var txtWidth = gCtx.measureText(txt).width
+    var alignX = x
+
     gCtx.beginPath()
-    // debugger
-    if (gMeme.selectedLineIdx === idx) {
-        if (!txt) return
-        else {
-            // switch (gCtx.textAlign) {
-            //     case 'left':
-            //         gCtx.strokeRect(x - 5, y - gMeme.lines[idx].size, gCtx.measureText(txt).width + 10, gMeme.lines[idx].size + 5)
-            //     case 'center':
-            //         gCtx.strokeRect(x - 5, y - gMeme.lines[idx].size, gCtx.measureText(txt).width + 10, gMeme.lines[idx].size + 5)
-            //     case 'right':
-            // }
-            gCtx.strokeRect(x - 5, y - gMeme.lines[idx].size, gCtx.measureText(txt).width + 10, gMeme.lines[idx].size + 5)
-        }
+
+    if (!txt) return
+
+    switch (gCtx.textAlign) {
+        case 'left':
+            if (gMeme.selectedLineIdx === idx) {
+            gCtx.strokeRect(x - 5, y - gMeme.lines[idx].size, txtWidth + 10, gMeme.lines[idx].size + 5)
+            }
+            break
+        case 'center':
+            alignX = gElCanvas.width / 2
+            if (gMeme.selectedLineIdx === idx) {
+            gCtx.strokeRect(alignX - txtWidth / 2 - 5, y - gMeme.lines[idx].size, txtWidth + 10, gMeme.lines[idx].size + 5)
+            }
+            break
+        case 'right':
+            alignX = gElCanvas.width - 50
+            if (gMeme.selectedLineIdx === idx) {
+            gCtx.strokeRect(alignX - txtWidth - 5, y - gMeme.lines[idx].size, txtWidth + 10, gMeme.lines[idx].size + 5)
+            }
+            break
     }
-    gCtx.fillText(txt, x, y)
-    gCtx.strokeText(txt, x, y)
+
+    gCtx.fillText(txt, alignX, y)
+    gCtx.strokeText(txt, alignX, y)
 }
 
 
